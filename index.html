@@ -114,7 +114,7 @@
             let routes = store.routes
             // Compute the number of routes per airline.
             let airlines = groupByAirline(store.routes);
-            console.log(airlines)
+            //console.log(airlines)
             // Draw airlines barchart
             drawAirlinesChart(airlines)
             drawMap(store.geoJSON) //Using the data saved on loadData
@@ -188,9 +188,7 @@
                 .attr("fill", "#2a5599")
                 .on("mouseenter", function(d) { // <- this is the new code
 
-                    console.log ('mouseenter')
                     //TODO: call the drawRoutes function passing the AirlineID id 'd'
-                    console.log( d )
                     drawRoutes ( d.AirlineID )
                     //TODO: change the fill color of the bar to "#992a5b" as a way to highlight the bar. Hint: use d3.select(this)
                     d3.select(this)
@@ -198,7 +196,6 @@
                 })
                 //TODO: Add another listener, this time for mouseleave
                 .on("mouseleave", function(d) {
-                    console.log ('mouseleave')
                     //TODO: In this listener, call drawRoutes(null), this will cause the function to remove all lines in the chart since there is no airline withe AirlineID == null.
                     drawRoutes ( null )
                     //TODO: change the fill color of the bar back to "#2a5599"
@@ -214,7 +211,7 @@
             let axisX = d3.axisBottom(xScale)
                             .ticks(5)
             
-            console.log ( config)
+            //console.log ( config)
             container.append("g")
                 .style("transform", `translate(${margin.left}px,${height - margin.bottom}px)`)
                 .call(axisX)
@@ -311,7 +308,7 @@
             let projection = getMapProjection(config) //get the projection
             let container = config.container; //get the container
 
-            console.log (airports)
+            //console.log (airports)
                     
             let circles = container.selectAll("circle");
             //TODO: bind the airports to the circles using the .data method.
@@ -322,10 +319,10 @@
             //      - Set the radius to 1
             //      - set the x and y position of the circle using the projection to convert longitude and latitude to x and y porision.
             //      - Set the fill color of the circle to  "#2a5599"
-                   .attr("r", "1px")
-                   .attr("cx", d => projection ( [d.Longitude , d.Latitude])[0] )
-                   .attr("cy", d => projection ( [d.Longitude , d.Latitude])[1] ) 
-                   .attr("fill" , "#2a5599" )
+                       .attr("r", "1px")
+                       .attr("cx", d => projection ( [d.Longitude , d.Latitude])[0] )
+                       .attr("cy", d => projection ( [d.Longitude , d.Latitude])[1] ) 
+                       .attr("fill" , "#2a5599" )
             
         }
 
@@ -336,7 +333,7 @@
             let container =  d3.select("#Map") //TODO: select the svg with id "Map" (our map container)
             let selectedRoutes = routes.filter ( (r) => { return r.AirlineID ==  airlineID } ) //TODO: filter the routes to keep only the routes which AirlineID is equal to the parameter airlineID received by the function
             
-            console.log ( selectedRoutes )
+            //console.log ( selectedRoutes )
 
             let bindedData = container.selectAll("line")
                 .data(selectedRoutes, d => d.ID) //This seconf parameter tells D3 what to use to identify the routes, this hepls D3 to correctly find which routes have been added or removed.     
